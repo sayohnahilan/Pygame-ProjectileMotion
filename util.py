@@ -1,10 +1,12 @@
 import math
 
+# retrieves angle between cursor and ball
 def findAngle(mouse, myBall):
     mouseX = mouse[0]
     mouseY = mouse[1]
     ballX = myBall.x
     ballY = myBall.y
+    # initial attempt
     try:
         angle = math.atan((ballY - mouseY) / (ballX - mouseX))
     except:
@@ -19,6 +21,7 @@ def findAngle(mouse, myBall):
 
     return angle
 
+# move the ball a certain amount
 def goBall(x, y, power, angle, t):
     vX = math.cos(angle) * power
     vY = math.sin(angle) * power
