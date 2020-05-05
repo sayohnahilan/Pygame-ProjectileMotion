@@ -25,12 +25,13 @@ power = 0
 angle = 0
 clock = pygame.time.Clock()
 inProgress = False
+
 myBall = ball(round(width/2), (height - ballRadius - 1), ballRadius, (255, 0, 0))
 
 while playing:
     clock.tick(200)
     if inProgress:
-        if myBall.y < height:
+        if (myBall.y < (height - ballRadius)):
             time += timeInc
             new = goBall(xCurrent, yCurrent, power, angle, time)
             myBall.x = new[0]
@@ -48,12 +49,13 @@ while playing:
             playing = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            inProgress = True
-            xCurrent = myBall.x
-            yCurrent = myBall.y
-            mouse = pygame.mouse.get_pos()
-            angle = findAngle(mouse, myBall)
-            power = math.sqrt((project[1][1]-project[0][1])**2 +(project[1][0]-project[0][1])**2) / powerDivider
+            if not inProgress:
+                inProgress = True
+                xCurrent = myBall.x
+                yCurrent = myBall.y
+                mouse = pygame.mouse.get_pos()
+                angle = findAngle(mouse, myBall)
+                power = math.sqrt((project[1][1]-project[0][1])**2 +(project[1][0]-project[0][1])**2) / powerDivider
 
 pygame.quit()
 quit()
