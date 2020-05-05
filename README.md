@@ -10,3 +10,6 @@ To run:
 Todo:
 1. Add x boundaries.
 2. Add friction / buoyancy.
+
+References:
+[1] https://pages.mtu.edu/~shene/COURSES/cs201/NOTES/chap02/projectile.html
