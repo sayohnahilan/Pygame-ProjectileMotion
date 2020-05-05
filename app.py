@@ -1,5 +1,6 @@
 import pygame
 from object import ball
+from util import findAngle
 
 width = 1600
 height = 900
@@ -26,6 +27,11 @@ while playing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             playing = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse = pygame.mouse.get_pos()
+            angle = findAngle(mouse, myBall)
+            print(angle)
 
 pygame.quit()
 quit()
