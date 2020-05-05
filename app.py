@@ -3,8 +3,12 @@ import math
 from object import ball
 from util import findAngle, goBall
 
+#tinker with these settings
 width = 1600
 height = 900
+ballRadius = 6
+timeInc = 0.05
+powerDivider = 10
 
 win = pygame.display.set_mode((width,height))
 pygame.display.set_caption('Projectile Motion with Pygame')
@@ -21,15 +25,20 @@ power = 0
 angle = 0
 clock = pygame.time.Clock()
 inProgress = False
-myBall = ball(800, 450, 6, (255, 0, 0))
+myBall = ball(round(width/2), (height - ballRadius - 1), ballRadius, (255, 0, 0))
 
 while playing:
-    clock.tick(250)
+    clock.tick(200)
     if inProgress:
-        time += 0.10
-        new = goBall(myBall.x, myBall.y, power, angle, time)
-        myBall.x = new[0]
-        myBall.y = new[1]
+        if myBall.y < height:
+            time += timeInc
+            new = goBall(xCurrent, yCurrent, power, angle, time)
+            myBall.x = new[0]
+            myBall.y = new[1]
+        else:
+            inProgress = False
+            time = 0
+            myBall.y = (height - ballRadius - 1)
 
     project = [(myBall.x, myBall.y), pygame.mouse.get_pos()]
     updateScreen()
@@ -40,9 +49,11 @@ while playing:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             inProgress = True
+            xCurrent = myBall.x
+            yCurrent = myBall.y
             mouse = pygame.mouse.get_pos()
             angle = findAngle(mouse, myBall)
-            power = math.sqrt((project[1][1]-project[0][1])**2 +(project[1][0]-project[0][1])**2)
+            power = math.sqrt((project[1][1]-project[0][1])**2 +(project[1][0]-project[0][1])**2) / powerDivider
 
 pygame.quit()
 quit()
