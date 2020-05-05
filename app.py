@@ -1,4 +1,5 @@
 import pygame
+import math
 from object import ball
 from util import findAngle
 
@@ -11,6 +12,7 @@ pygame.display.set_caption('Projectile Motion with Pygame')
 def updateScreen():
     win.fill((64, 64, 64))
     myBall.draw(win)
+    pygame.draw.line(win, (0, 255, 0), project[0], project[1])
     pygame.display.update()
 
 playing = True
@@ -22,7 +24,8 @@ clock = pygame.time.Clock()
 myBall = ball(800, 450, 6, (255, 0, 0))
 
 while playing:
-    clock.tick(200)
+    clock.tick(250)
+    project = [(myBall.x, myBall.y), pygame.mouse.get_pos()]
     updateScreen()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -31,7 +34,7 @@ while playing:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = pygame.mouse.get_pos()
             angle = findAngle(mouse, myBall)
-            print(angle)
+            power = math.sqrt((project[1][1]-project[0][1])**2 +(project[1][0]-project[0][1])**2)
 
 pygame.quit()
 quit()

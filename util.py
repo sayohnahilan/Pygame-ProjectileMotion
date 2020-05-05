@@ -16,11 +16,5 @@ def findAngle(mouse, myBall):
     # Mouse is above and to the left of ball
     elif mouseY < ballY and mouseX < ballX:
         angle = math.pi - angle
-    # Mouse is under and to the left of ball
-    elif mouseY > ballY and mouseX < ballX:
-        angle = math.pi + abs(angle)
-    # Mouse is under and to the right of ball
-    elif mouseY > ballY and mouseX > ballX:
-        angle = (math.pi * 2) - angle
 
     return angle
