@@ -1,10 +1,10 @@
 import pygame
 
 class ball(object):
-    def __init__(self,x,y,radius,color):
+    def __init__(self,x,y,r,color):
         self.x = x
         self.y = y
-        self.radius = radius
+        self.radius = r
         self.color = color
 
     def draw(self, win):

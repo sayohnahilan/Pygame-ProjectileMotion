@@ -18,3 +18,12 @@ def findAngle(mouse, myBall):
         angle = math.pi - angle
 
     return angle
+
+def goBall(x, y, power, angle, t):
+    vX = math.cos(angle) * power
+    vY = math.sin(angle) * power
+    deltaX = vX * t
+    deltaY = ((-4.9 * (t ** 2)) / 2) + (vY * t)
+    newx = round(deltaX + x)
+    newy = round(y - deltaY)
+    return (newx, newy)
